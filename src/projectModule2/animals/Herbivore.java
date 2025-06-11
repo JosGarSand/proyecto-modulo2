@@ -5,4 +5,14 @@ public class Herbivore extends Animal {
     public void eat(){
 
     }
+
+    @Override
+    public void reproduce() {
+
+    }
+
+    @Override
+    public void move() {
+
+    }
 }
