@@ -1,6 +1,6 @@
-package projectModule2.base.carnivores;
+package projectModule2.animals.carnivores;
 
-import projectModule2.base.Carnivore;
+import projectModule2.animals.Carnivore;
 
 public class Boa extends Carnivore {
     public Boa(){

@@ -1,4 +1,4 @@
-package projectModule2.base;
+package projectModule2.animals;
 
 public class Plant {
     protected int weight = 1;

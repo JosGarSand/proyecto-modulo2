@@ -1,6 +1,6 @@
-package projectModule2.base.carnivores;
+package projectModule2.animals.carnivores;
 
-import projectModule2.base.Carnivore;
+import projectModule2.animals.Carnivore;
 
 public class Wolf extends Carnivore {
     public Wolf(){
@@ -8,5 +8,7 @@ public class Wolf extends Carnivore {
         this.maxInEachArea = 30;
         this.speed = 3;
         this.foodNeeded = 8;
+
+
     }
 }

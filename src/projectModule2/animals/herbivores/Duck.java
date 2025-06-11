@@ -1,6 +1,6 @@
-package projectModule2.base.herbivores;
+package projectModule2.animals.herbivores;
 
-import projectModule2.base.Herbivore;
+import projectModule2.animals.Herbivore;
 
 public class Duck extends Herbivore {
     public Duck(){
