@@ -9,7 +9,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Location {
     private final List<Animal> animals = new CopyOnWriteArrayList<>();
     private final List<Plant> plants = new CopyOnWriteArrayList<>();
-    public int x, y;
+    private final int x, y;
 
     public Location(int x, int y) {
         this.x = x;
@@ -28,8 +28,24 @@ public class Location {
         animals.add( animal );
     }
 
+    public void removeAnimal(Animal animal){
+        animals.remove(animal);
+    }
+
+
     public void addPlant(Plant plant) {
         plants.add( plant );
     }
 
+    public void removePlant(Plant plant){
+        plants.remove(plant);
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 }
