@@ -1,5 +1,6 @@
 package projectModule2.Island;
 
+import org.w3c.dom.ls.LSOutput;
 import projectModule2.animals.Animal;
 import projectModule2.animals.Plant;
 
@@ -28,24 +29,24 @@ public class Location {
         animals.add( animal );
     }
 
-    public void removeAnimal(Animal animal){
-        animals.remove(animal);
-    }
-
-
     public void addPlant(Plant plant) {
         plants.add( plant );
     }
 
-    public void removePlant(Plant plant){
-        plants.remove(plant);
+    public void removeAnimal(Animal animal) {
+        animals.remove( animal );
     }
 
-    public int getX() {
+    public void removePlant(Plant plant) {
+        plants.remove( plant );
+    }
+
+    public int getx() {
         return x;
     }
 
-    public int getY() {
+    public int gety() {
         return y;
     }
+
 }
