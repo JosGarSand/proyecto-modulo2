@@ -3,7 +3,7 @@ package projectModule2.animals;
 import projectModule2.Island.Island;
 import projectModule2.Island.Location;
 
-public  class Carnivore extends Animal {
+public class Carnivore extends Animal {
     @Override
     public void eat(Location location) {
 
