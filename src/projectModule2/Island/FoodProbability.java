@@ -1,5 +1,6 @@
-package projectModule2.animals;
+package projectModule2.Island;
 
+import projectModule2.animals.Animal;
 import projectModule2.animals.carnivores.*;
 import projectModule2.animals.herbivores.*;
 
@@ -64,7 +65,7 @@ public class FoodProbability {
         duckDiet.put( Caterpillar.class, 90 );
         table.put( Duck.class, duckDiet );
 
-        //Dieta de Jabali (orugas)
+        //Dieta de Boar (orugas)
         Map<Class<?extends Animal >, Integer > boarDiet = new HashMap<>();
         boarDiet.put( Caterpillar.class, 90 );
         table.put( Boar.class, boarDiet );
@@ -76,5 +77,9 @@ public class FoodProbability {
             return preyMap.getOrDefault( prey, 0);
         }
         return 0;
+
     }
+
+
+
 }

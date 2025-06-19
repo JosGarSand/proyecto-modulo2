@@ -25,19 +25,19 @@ public class Location {
         return plants;
     }
 
-    public void addAnimal(Animal animal) {
+    public synchronized void addAnimal(Animal animal) {
         animals.add( animal );
     }
 
-    public void addPlant(Plant plant) {
+    public synchronized void addPlant(Plant plant) {
         plants.add( plant );
     }
 
-    public void removeAnimal(Animal animal) {
+    public synchronized void removeAnimal(Animal animal) {
         animals.remove( animal );
     }
 
-    public void removePlant(Plant plant) {
+    public synchronized void removePlant(Plant plant) {
         plants.remove( plant );
     }
 

@@ -13,7 +13,7 @@ public class Herbivore extends Animal {
 
     }
     @Override
-    public void move() {
+    public void move(Location location) {
 
     }
 }
