@@ -15,12 +15,16 @@ public abstract class Animal {
         return alive;
     }
 
+    public double getFoodEaten(){
+        return foodEaten;
+    }
 
+    public abstract void move(Location currentLocation, Island island);
 
     public abstract void eat(Location location);
 
     public abstract void reproduce(Location currentLocation, Island island);
 
-    public abstract void move(Location location);
+
 }
 
