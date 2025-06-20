@@ -4,14 +4,16 @@ import projectModule2.Island.FoodProbability;
 import projectModule2.Island.Island;
 import projectModule2.Island.Location;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Carnivore extends Animal {
+
+
     @Override
     public void eat(Location location) {
+
         List<Animal> animals = new ArrayList<>(location.getAnimals());
+        Collections.shuffle(animals);
 
         for (Animal prey : animals){
             if (prey == this || !prey.isAlive()) continue;
@@ -33,7 +35,9 @@ public class Carnivore extends Animal {
 
         if (foodEaten >= foodNeeded){
             hungerCycles = 0;
+
         } else {
+
             hungerCycles++;
             if (hungerCycles >= maxHungerCycles){
                 alive = false;
@@ -87,11 +91,10 @@ public class Carnivore extends Animal {
 
 
     }
+
     @Override
     public void reproduce(Location currentLocation, Island island) {
 
     }
-
-
 }
 
