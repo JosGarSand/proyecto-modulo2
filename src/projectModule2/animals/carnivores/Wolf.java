@@ -8,7 +8,7 @@ public class Wolf extends Carnivore {
         this.maxInEachArea = 30;
         this.speed = 3;
         this.foodNeeded = 8;
-
+        this.foodEaten = 0;//this.alive = true;
 
     }
 }
