@@ -10,6 +10,8 @@ public abstract class Animal {
     protected double foodNeeded;
     protected double foodEaten;
     protected boolean alive = true;
+    protected int hungerCycles = 0;
+    protected int maxHungerCycles = 3;
 
     public boolean isAlive() {
         return alive;

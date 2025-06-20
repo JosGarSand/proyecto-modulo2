@@ -30,6 +30,18 @@ public class Carnivore extends Animal {
                 if (foodEaten >= foodNeeded) break;
             }
         }
+
+        if (foodEaten >= foodNeeded){
+            hungerCycles = 0;
+        } else {
+            hungerCycles++;
+            if (hungerCycles >= maxHungerCycles){
+                alive = false;
+                location.removeAnimal( this );
+            }
+        }
+
+        foodEaten = 0;
     }
 
 
@@ -38,15 +50,15 @@ public class Carnivore extends Animal {
         int x = currentLocation.getx();
         int y = currentLocation.gety();
 
-        List<Location> possible = new ArrayList<>();
+        List<Location> possibleLocations = new ArrayList<>();
 
-        for (int dX = -speed; dX <= speed; dX++){
-            for (int dY = -speed; dY <= speed; dY++){
+        for (int dx = -speed; dx <= speed; dx++){
+            for (int dy = -speed; dy <= speed; dy++){
                 //Si es en la misma posicion, saltar en su lugar, para que no se "mueva" a su lugar
-                if (dX == 0 && dY == 0) continue;
+                if (dx == 0 && dy == 0) continue;
 
-                int newX = x + dX;
-                int newY = y + dY;
+                int newX = x + dx;
+                int newY = y + dy;
                 Location destination = island.getLocation( newX, newY );
 
                 if (destination != null) {
@@ -54,18 +66,19 @@ public class Carnivore extends Animal {
                     for (Animal actual : destination.getAnimals()){
                         if(actual.getClass() == this.getClass()){
                             countSameType++;
-                            if (countSameType < maxInEachArea){
-                                possible.add(destination);
-                            }
+
                         }
+                    }
+                    if (countSameType < maxInEachArea){
+                        possibleLocations.add(destination);
                     }
                 }
             }
         }
 
         //Si hay algun lugar valido, moverse a alguno al azar
-        if (!possible.isEmpty()){
-            Location destination = possible.get(new Random().nextInt(possible.size()));
+        if (!possibleLocations.isEmpty()){
+            Location destination = possibleLocations.get(new Random().nextInt(possibleLocations.size()));
 
             //Quitar de la ubicacion actual y mover a la nueva
             currentLocation.removeAnimal( this );
