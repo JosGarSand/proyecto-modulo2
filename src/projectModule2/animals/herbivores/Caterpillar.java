@@ -9,4 +9,9 @@ public class Caterpillar extends Herbivore {
         this.speed = 0;
         this.foodNeeded = 0;
     }
+
+    @Override
+    protected Herbivore createBaby() {
+        return new Caterpillar();
+    }
 }

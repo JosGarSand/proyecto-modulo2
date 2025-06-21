@@ -9,4 +9,8 @@ public class Rabbit extends Herbivore {
         this.speed = 2;
         this.foodNeeded = 0.45;
     }
+
+    protected Herbivore createBaby() {
+        return new Rabbit();
+    }
 }

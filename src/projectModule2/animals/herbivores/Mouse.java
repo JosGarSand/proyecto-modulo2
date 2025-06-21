@@ -9,4 +9,8 @@ public class Mouse extends Herbivore {
         this.speed = 1;
         this.foodNeeded = 0.01;
     }
+
+    protected Herbivore createBaby() {
+        return new Mouse();
+    }
 }

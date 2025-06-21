@@ -6,8 +6,9 @@ import projectModule2.Island.Location;
 
 import java.util.*;
 
-public class Carnivore extends Animal {
+public abstract class Carnivore extends Animal {
 
+    protected abstract Carnivore createBaby();
 
     @Override
     public void eat(Location location) {
@@ -94,7 +95,24 @@ public class Carnivore extends Animal {
 
     @Override
     public void reproduce(Location currentLocation, Island island) {
+        int sameTypeAlive = 0;
+        int sameTypeTotal = 0;
 
+        List<Animal> animals = currentLocation.getAnimals();
+
+        for (Animal animal : animals){
+            if (animal.getClass() == this.getClass()){
+                sameTypeTotal++;
+                if (animal.isAlive()){
+                    sameTypeAlive++;
+                }
+            }
+        }
+
+        if (sameTypeAlive >= 2 && sameTypeTotal < maxInEachArea){
+            Animal baby = createBaby();
+            currentLocation.addAnimal( baby );
+        }
     }
 }
 

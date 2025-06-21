@@ -8,20 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Herbivore extends Animal {
+public abstract class Herbivore extends Animal {
+    protected abstract Herbivore createBaby();
+
     @Override
     public void eat(Location location) {
-        double consumedFood = 0.0;
 
         //Comer plantas
-        List<Plant> plants = new ArrayList<>( location.getPlants() );
+        List<Plant> plants = new ArrayList<>(location.getPlants());
         for (Plant plant : plants) {
             double foodLeft = foodNeeded - foodEaten;
-            double consumed = Math.min( plant.weight, foodLeft );
+            double consumed = Math.min(plant.weight, foodLeft);
 
             foodEaten += consumed;
-            consumedFood += consumed;
-            location.removePlant( plant );
+            location.removePlant(plant);
 
             if (foodEaten >= foodNeeded) return;
         }
@@ -29,42 +29,37 @@ public class Herbivore extends Animal {
         //Comer orugas si aplica
         if (foodEaten < foodNeeded) {
 
-            List<Animal> animals = new ArrayList<>( location.getAnimals() );
+            List<Animal> animals = new ArrayList<>(location.getAnimals());
             for (Animal prey : animals) {
                 if (prey == this || !prey.isAlive()) continue;
 
-                int chance = FoodProbability.getProbability( this.getClass(), prey.getClass() );
+                int chance = FoodProbability.getProbability(this.getClass(), prey.getClass());
 
-                if (chance > 0 && new Random().nextInt( 100 ) < chance) {
+                if (chance > 0 && new Random().nextInt(100) < chance) {
                     double preyWeight = prey.weight;
                     double foodLeft = foodNeeded - foodEaten;
-                    double consumed = Math.min( preyWeight, foodLeft );
+                    double consumed = Math.min(preyWeight, foodLeft);
 
                     foodEaten += consumed;
-                    consumedFood += consumed;
                     prey.alive = false;
-                    location.removeAnimal( prey );
+                    location.removeAnimal(prey);
 
                     if (foodEaten >= foodNeeded) break;
                 }
             }
         }
 
-        if (consumedFood >= foodNeeded){
+        //Evalua si sobrevive o muere de hambre
+        if (foodEaten >= foodNeeded) {
             hungerCycles = 0;
         } else {
             hungerCycles++;
-            if (hungerCycles >= maxHungerCycles){
+            if (hungerCycles >= maxHungerCycles) {
                 alive = false;
-                location.removeAnimal( this );
+                location.removeAnimal(this);
             }
         }
         foodEaten = 0;
-    }
-
-    @Override
-    public void reproduce(Location currentLocation, Island island) {
-
     }
 
     @Override
@@ -81,7 +76,7 @@ public class Herbivore extends Animal {
 
                 int newX = x + dx;
                 int newY = y + dy;
-                Location destination = island.getLocation( newX, newY );
+                Location destination = island.getLocation(newX, newY);
 
                 if (destination != null) {
                     long countSameType = 0;
@@ -92,7 +87,7 @@ public class Herbivore extends Animal {
                         }
                     }
                     if (countSameType < maxInEachArea) {
-                        possibleLocations.add( destination );
+                        possibleLocations.add(destination);
                     }
                 }
             }
@@ -100,13 +95,33 @@ public class Herbivore extends Animal {
 
         //Si hay algun lugar valido, moverse a alguno al azar
         if (!possibleLocations.isEmpty()) {
-            Location destination = possibleLocations.get( new Random().nextInt( possibleLocations.size() ) );
+            Location destination = possibleLocations.get(new Random().nextInt(possibleLocations.size()));
 
             //Quitar de la ubicacion actual y mover a la nueva
-            currentLocation.removeAnimal( this );
-            destination.addAnimal( this );
+            currentLocation.removeAnimal(this);
+            destination.addAnimal(this);
+        }
+    }
+
+    @Override
+    public void reproduce(Location currentLocation, Island island) {
+        int sameTypeAlive = 0;
+        int sameTypeTotal = 0;
+
+        List<Animal> animals = currentLocation.getAnimals();
+
+        for (Animal animal : animals) {
+            if (animal.getClass() == this.getClass()) {
+                sameTypeTotal++;
+                if (animal.isAlive()) {
+                    sameTypeAlive++;
+                }
+            }
         }
 
-
+        if (sameTypeAlive >= 2 && sameTypeTotal < maxInEachArea) {
+            Animal baby = createBaby();
+            currentLocation.addAnimal(baby);
+        }
     }
 }

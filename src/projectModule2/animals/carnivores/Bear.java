@@ -8,5 +8,11 @@ public class Bear extends Carnivore {
         this.maxInEachArea = 5;
         this.speed = 2;
         this.foodNeeded = 80;
+
+    }
+
+    @Override
+    protected Carnivore createBaby() {
+        return new Bear();
     }
 }

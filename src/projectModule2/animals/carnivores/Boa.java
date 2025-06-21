@@ -9,4 +9,9 @@ public class Boa extends Carnivore {
         this.speed = 1;
         this.foodNeeded = 3;
     }
+
+    @Override
+    protected Carnivore createBaby() {
+        return new Boa();
+    }
 }

@@ -9,4 +9,9 @@ public class Eagle extends Carnivore {
         this.speed = 3;
         this.foodNeeded = 1;
     }
+
+    @Override
+    protected Carnivore createBaby() {
+        return new Eagle();
+    }
 }

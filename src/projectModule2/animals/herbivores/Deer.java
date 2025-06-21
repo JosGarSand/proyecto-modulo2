@@ -9,4 +9,9 @@ public class Deer extends Herbivore {
         this.speed = 4;
         this.foodNeeded = 50;
     }
+
+    @Override
+    protected Herbivore createBaby() {
+        return new Deer();
+    }
 }

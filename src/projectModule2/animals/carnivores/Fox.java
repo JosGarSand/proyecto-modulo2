@@ -9,4 +9,9 @@ public class Fox extends Carnivore {
         this.speed = 2;
         this.foodNeeded = 2;
     }
+
+    @Override
+    protected Carnivore createBaby() {
+        return new Fox();
+    }
 }
